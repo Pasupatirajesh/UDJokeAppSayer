@@ -1,0 +1,135 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 26
+    buildToolsVersion '26.0.2'
+    flavorDimensions "versionCode"
+
+    defaultConfig {
+        applicationId "com.udacity.gradle.builditbigger"
+        minSdkVersion 16
+        targetSdkVersion 26
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+        javaCompileOptions {
+            annotationProcessorOptions {
+                includeCompileClasspath false
+            }
+        }
+
+        defaultConfig {
+            multiDexEnabled true
+        }
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    productFlavors {
+        free{
+            applicationId 'com.android.application.flavors.free'
+        }
+        paid {
+            applicationId 'com.android.application.flavors.paid'
+
+        }
+    }
+}
+
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    androidTestImplementation('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+    implementation 'com.android.support:appcompat-v7:26.1.0'
+    implementation 'com.google.android.gms:play-services-ads:11.6.0'
+    annotationProcessor 'com.jakewharton:butterknife:7.0.1'
+    implementation 'com.jakewharton:butterknife:7.0.1'
+    implementation files('libs/myApi-v1-1.23.0-SNAPSHOT.jar')
+    implementation project(':javalib')
+    implementation project(':androidlib')
+
+    // Begin Google APIs
+// Play Services will validate the application prior to allowing OAuth2 access.
+    compile 'com.google.android.gms:play-services:11.6.0'
+// The following lines implement maven imports as defined at:
+// https://code.google.com/p/google-api-java-client/wiki/Setup
+// Add the Google API client library
+    compile('com.google.api-client:google-api-client:1.23.0') {
+        // Exclude atrifacts that the Android SDK/Runtime provides
+        exclude(group: 'xpp3', module: 'xpp3')
+        exclude(group: 'org.appache.httpcomponents', module: 'httpclient')
+        exclude(group: 'junit', module: 'junit')
+        exclude(group: 'com.google.android', module: 'android')
+
+    }
+// Add the Android extensions for the Google API client library.
+// This will automatically include play services as long as you have download that library
+// from the Android SDK manager.
+// Add the Android extensions for the Google API client library.
+    compile('com.google.api-client:google-api-client-android:1.23.0') {
+        // Exclude play services, since we're not using this yet.
+        exclude(group: 'com.google.android.gms:play-services', module: 'google-play-services')
+    }
+// END Google APIs
+// The following client libraries make HTTP/JSON on Android easier.
+// Android extensions for Google HTTP Client.
+    compile('com.google.http-client:google-http-client-android:1.23.0') {
+        exclude(group: 'com.google.android', module: 'android')
+    }
+// This is used by the Google HTTP client library.
+    compile 'com.google.guava:guava:19.0'
+
+}
+buildscript {
+    repositories {
+        jcenter()
+    }
+
+    dependencies{
+        classpath 'com.google.appengine:gradle-appengine-plugin:1.9.42'
+    }
+}
+buildscript{
+    repositories {
+        jcenter()
+        mavenCentral()
+
+        maven {
+            url "https://maven-central.storage.googleapis.com"
+        }
+    }
+
+    dependencies {
+        // V2: Add the new App Engine and Endpoints Frameworks plugin dependencies
+        classpath 'com.google.cloud.tools:endpoints-framework-gradle-plugin:1.0.2'
+        classpath 'com.google.cloud.tools:appengine-gradle-plugin:1.3.3'
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'com.google.endpoints:endpoints-framework:2.0.8'
+    implementation 'javax.inject:javax.inject:1'
+    implementation 'javax.servlet:servlet-api:2.5'
+//    annotationProcessor 'com.jakewharton:butterknife:7.0.1'
+    annotationProcessor 'com.jakewharton:butterknife:7.0.1'
+    implementation 'com.jakewharton:butterknife:7.0.1'
+
+    //Test only dependencies
+    androidTestCompile 'com.android.support:support-annotations:26.1.0'
+    androidTestCompile 'com.android.support.test.espresso:espresso-core:3.0.1'
+    androidTestCompile 'com.jakewharton.espresso:okhttp3-idling-resource:1.0.0'
+
+
+}
+
+
+sourceCompatibility = "1.7"
+targetCompatibility = "1.7"
