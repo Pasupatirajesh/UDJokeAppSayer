@@ -1,12 +1,11 @@
 apply plugin: 'com.android.application'
-<<<<<<< HEAD
 
 android {
     compileSdkVersion 26
     buildToolsVersion '26.0.2'
     flavorDimensions "versionCode"
 
-=======
+
 //apply plugin: 'com.google.cloud.tools.appengine'
 //apply plugin: 'com.google.cloud.tools.endpoints-framework-server'
 
@@ -29,7 +28,7 @@ android {
     compileSdkVersion 26
     buildToolsVersion '26.0.2'
     flavorDimensions "versionCode"
->>>>>>> Build Flavors error
+
     defaultConfig {
         applicationId "com.udacity.gradle.builditbigger"
         minSdkVersion 16
@@ -37,26 +36,23 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-<<<<<<< HEAD
 
-=======
->>>>>>> Build Flavors error
         javaCompileOptions {
             annotationProcessorOptions {
                 includeCompileClasspath false
             }
         }
-<<<<<<< HEAD
+
 
         defaultConfig {
             multiDexEnabled true
         }
-=======
+
         defaultConfig {
             multiDexEnabled true
         }
         signingConfig signingConfigs.config
->>>>>>> Build Flavors error
+
     }
     buildTypes {
         release {
@@ -64,7 +60,7 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-<<<<<<< HEAD
+
 
     productFlavors {
         free{
@@ -75,7 +71,7 @@ android {
 
         }
     }
-=======
+
     productFlavors {
         free {
             dimension "versionCode"
@@ -89,16 +85,16 @@ android {
         }
     }
     sourceSets { free { java.srcDirs = ['src/free/java', 'src/free/java/'] } }
->>>>>>> Build Flavors error
+
 }
 
 
 dependencies {
-<<<<<<< HEAD
+
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-=======
-    implementation fileTree(include: ['*.jar'], dir: 'libs')
->>>>>>> Build Flavors error
+
+//    implementation fileTree(include: ['*.jar'], dir: 'libs')
+
     androidTestImplementation('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
@@ -109,7 +105,7 @@ dependencies {
     implementation files('libs/myApi-v1-1.23.0-SNAPSHOT.jar')
     implementation project(':javalib')
     implementation project(':androidlib')
-<<<<<<< HEAD
+
 
     // Begin Google APIs
 // Play Services will validate the application prior to allowing OAuth2 access.
@@ -117,14 +113,14 @@ dependencies {
 // The following lines implement maven imports as defined at:
 // https://code.google.com/p/google-api-java-client/wiki/Setup
 // Add the Google API client library
-=======
+
     // Begin Google APIs
     // Play Services will validate the application prior to allowing OAuth2 access.
 //    compile 'com.google.android.gms:play-services:11.6.0'
     // The following lines implement maven imports as defined at:
     // https://code.google.com/p/google-api-java-client/wiki/Setup
     // Add the Google API client library
->>>>>>> Build Flavors error
+
     compile('com.google.api-client:google-api-client:1.23.0') {
         // Exclude atrifacts that the Android SDK/Runtime provides
         exclude(group: 'xpp3', module: 'xpp3')
@@ -133,22 +129,22 @@ dependencies {
         exclude(group: 'com.google.android', module: 'android')
 
     }
-<<<<<<< HEAD
+
 // Add the Android extensions for the Google API client library.
 // This will automatically include play services as long as you have download that library
 // from the Android SDK manager.
 // Add the Android extensions for the Google API client library.
-=======
+
     // Add the Android extensions for the Google API client library.
     // This will automatically include play services as long as you have download that library
     // from the Android SDK manager.
     // Add the Android extensions for the Google API client library.
->>>>>>> Build Flavors error
+
     compile('com.google.api-client:google-api-client-android:1.23.0') {
         // Exclude play services, since we're not using this yet.
         exclude(group: 'com.google.android.gms:play-services', module: 'google-play-services')
     }
-<<<<<<< HEAD
+
 // END Google APIs
 // The following client libraries make HTTP/JSON on Android easier.
 // Android extensions for Google HTTP Client.
@@ -201,15 +197,14 @@ dependencies {
 
 
 }
-=======
     // END Google APIs
     // The following client libraries make HTTP/JSON on Android easier.
     // Android extensions for Google HTTP Client.
-    compile('com.google.http-client:google-http-client-android:1.23.0') {
-        exclude(group: 'com.google.android', module: 'android')
-    }
+//    implementation('com.google.http-client:google-http-client-android:1.23.0') {
+//        exclude(group: 'com.google.android', module: 'android')
+//    }
     // This is used by the Google HTTP client library.
-    compile 'com.google.guava:guava:19.0'
+//    implementation 'com.google.guava:guava:19.0'
 }
 //buildscript {
 //    repositories {
@@ -253,7 +248,7 @@ dependencies {
 
 
 //}
->>>>>>> Build Flavors error
+
 
 
 sourceCompatibility = "1.7"
