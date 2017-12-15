@@ -1,0 +1,99 @@
+apply plugin: 'com.android.application'
+android {
+    compileSdkVersion 26
+    buildToolsVersion '26.0.2'
+    flavorDimensions "versionCode"
+
+        signingConfigs {
+            config {
+                keyAlias 'podaDei@90'
+                keyPassword 'Appama@90'
+                storeFile file('/Users/SSubra27/Documents/androidKeyStore')
+                storePassword 'Appama@90'
+            }
+        }
+
+        lintOptions {
+            checkReleaseBuilds false
+            abortOnError false
+        }
+
+
+        defaultConfig {
+            applicationId "com.udacity.gradle.builditbigger"
+            minSdkVersion 16
+            targetSdkVersion 26
+            versionCode 1
+            versionName "1.0"
+            testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+            defaultConfig {
+                multiDexEnabled true
+                dexOptions {
+                    javaMaxHeapSize "4g"
+                }
+                android.defaultConfig.javaCompileOptions.annotationProcessorOptions.includeCompileClasspath = true
+            }
+            signingConfig signingConfigs.config
+
+
+        }
+        buildTypes {
+            release {
+                minifyEnabled false
+                proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            }
+        }
+        productFlavors {
+            free {
+                dimension "versionCode"
+                applicationId 'com.udacity.gradle.builditbigger.free'
+                resValue "string", "flavored_app_name", "Free Joke App"
+            }
+            paid {
+                dimension "versionCode"
+                applicationId 'com.udacity.gradle.builditbigger.paid'
+                resValue "string", "flavored_app_name", "Paid Joke App"
+            }
+        }
+        sourceSets { free { java.srcDirs = ['src/free/java', 'src/free/java/'] } }
+
+    }
+
+    configurations {
+        all*.exclude group: 'com.android.support', module: 'support-v7'
+        all*.exclude group: 'com.google.android.gms', module: 'play-services'
+    }
+
+
+    dependencies {
+
+        implementation fileTree(dir: 'libs', include: ['*.jar'])
+        implementation 'com.android.support:appcompat-v7:26.1.0'
+        implementation 'com.google.android.gms:play-services-ads:11.6.0'
+        implementation project(':javalib')
+        implementation project(':androidlib')
+
+        compile('com.google.api-client:google-api-client-android:1.23.0') {
+            // Exclude play services, since we're not using this yet.
+            exclude(group: 'com.google.android.gms:play-services', module: 'google-play-services')
+            exclude group: 'com.google.guava'
+        }
+
+        compile('com.google.http-client:google-http-client-android:1.23.0') {
+            exclude(group: 'com.google.android', module: 'android')
+        }
+
+        compile 'com.google.guava:guava:19.0'
+
+        implementation 'com.google.endpoints:endpoints-framework:2.0.8'
+        //Test only dependencies
+        androidTestCompile 'com.android.support:support-annotations:26.1.0'
+        androidTestCompile 'com.android.support.test.espresso:espresso-core:3.0.1'
+        androidTestCompile 'com.jakewharton.espresso:okhttp3-idling-resource:1.0.0'
+
+    }
+
+
+
+sourceCompatibility = "1.7"
+targetCompatibility = "1.7"
