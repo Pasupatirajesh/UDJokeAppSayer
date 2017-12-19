@@ -17,8 +17,7 @@ import com.google.api.server.spi.config.ApiNamespace;
 
 public class MyEndpoint {
 @ApiMethod(name="sayJoke")
-    public JokeSayer sayJoke()
-{
+    public JokeSayer sayJoke() {
     JokeSayer jokeSayer = new JokeSayer();
     jokeSayer.setJoke();
     jokeSayer.getJoke();

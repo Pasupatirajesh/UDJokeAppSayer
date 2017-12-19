@@ -9,28 +9,21 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".MainAcitivityFragment">
 
-    <TextView
-        android:id="@+id/instructions_text_view"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/instructions" />
+    <!--<TextView-->
+        <!--android:id="@+id/instructions_text_view"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="@string/instructions" />-->
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/instructions_text_view"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="143dp"
-        android:text="@string/button_text"
-        android:id="@+id/button2"/>
+    <!--<Button-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_below="@+id/instructions_text_view"-->
+        <!--android:layout_centerHorizontal="true"-->
+        <!--android:layout_marginTop="143dp"-->
+        <!--android:text="@string/button_text"-->
+        <!--android:id="@+id/button2"/>-->
 
-    <com.google.android.gms.ads.AdView
-        android:id="@+id/adView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        ads:adSize="BANNER"
-        ads:adUnitId="@string/banner_ad_unit_id"></com.google.android.gms.ads.AdView>
+
 
 </RelativeLayout>
