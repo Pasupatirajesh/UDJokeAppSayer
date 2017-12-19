@@ -43,6 +43,7 @@ dependencies {
     implementation 'javax.servlet:servlet-api:2.5'
 
     implementation 'com.jakewharton:butterknife:7.0.1'
+    compile project(path: ':javalib')
 }
 
 sourceCompatibility = "1.7"

@@ -24,19 +24,15 @@ class EndpointsAsyncTask extends AsyncTask<Pair<Context, String>, Void, List<Str
     Context mContext;
 
 
-    EndpointsAsyncTask(Context context)
-    {
+    EndpointsAsyncTask(Context context) {
         this.mContext = context;
 
     }
 
-
-
     @SafeVarargs
     @Override
     protected final List<String> doInBackground(Pair<Context, String>... pairs) {
-        if(myApiService == null)
-        {
+        if (myApiService == null) {
             MyApi.Builder builder = new MyApi.Builder(AndroidHttp.newCompatibleTransport(),
                     new AndroidJsonFactory(), null)
                     // options for running against local devappserver
@@ -56,8 +52,7 @@ class EndpointsAsyncTask extends AsyncTask<Pair<Context, String>, Void, List<Str
 
         try {
             return myApiService.sayJoke().execute().getJoke();
-        } catch (IOException ioe)
-        {
+        } catch (IOException ioe) {
             return null;
         }
     }
@@ -65,8 +60,6 @@ class EndpointsAsyncTask extends AsyncTask<Pair<Context, String>, Void, List<Str
     @Override
     protected void onPostExecute(List<String> s) {
         super.onPostExecute(s);
-        MainActivityFragment.mJokeArrayList= (ArrayList<String>) s;
-
-
+        MainActivityFragment.mJokeArrayList = (ArrayList<String>) s;
     }
 }

@@ -10,7 +10,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.Toast;
 
 import com.example.android.androidlib.LibraryActivity;
 import com.google.android.gms.ads.AdListener;
@@ -42,9 +41,9 @@ public class MainActivityFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View root = inflater.inflate(R.layout.fragment_main, container, false);
+        View root = inflater.inflate(R.layout.fragment_main_free, container, false);
 
-        AdView mAdView = (AdView) root.findViewById(R.id.adView);
+        AdView mAdView = (AdView) root.findViewById(R.id.ad_View);
         // Create an ad request. Check logcat output for the hashed device ID to
         // get test ads on a physical device. e.g.
         // "Use AdRequest.Builder.addTestDevice("ABCDEF012345") to get test ads on this device."
@@ -55,38 +54,27 @@ public class MainActivityFragment extends Fragment {
 
         mInterstitialAd = new InterstitialAd(getContext());
         mInterstitialAd.setAdUnitId("ca-app-pub-3940256099942544/1033173712");
-        if(!mInterstitialAd.isLoading() && !mInterstitialAd.isLoaded())
         mInterstitialAd.loadAd(new AdRequest.Builder().build());
 
-        mJokeButton = (Button) root.findViewById(R.id.button2);
+            mJokeButton = (Button) root.findViewById(R.id.button2);
 
-        mJokeButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(mInterstitialAd!=null && mInterstitialAd.isLoaded()){
+            mJokeButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
                     mInterstitialAd.show();
-                } else
-                {
-                    Toast.makeText(getContext(), "Ad is not loading", Toast.LENGTH_SHORT).show();
+
+                    mInterstitialAd.setAdListener(new AdListener() {
+                            @Override
+                            public void onAdClosed() {
+                                super.onAdClosed();
+                                Intent intent = new Intent(getContext(), LibraryActivity.class);
+                                intent.putStringArrayListExtra("JokeText", mJokeArrayList);
+                                startActivity(intent);
+                                mInterstitialAd.loadAd(new AdRequest.Builder().build());
+                            }
+                        });
+
                 }
-                mInterstitialAd.setAdListener(new AdListener() {
-                    @Override
-                    public void onAdClosed() {
-                        super.onAdClosed();
-
-                        Intent intent = new Intent(getContext(), LibraryActivity.class);
-                        if (mJokeArrayList != null)
-                            intent.putStringArrayListExtra("JokeText", mJokeArrayList);
-                        startActivity(intent);
-                        mInterstitialAd.loadAd(new AdRequest.Builder().build());
-                    }
-                });
-
-
-            }
-        });
-
-        return root;
-    }
-
-}
+            });
+            return root;
+        }}
